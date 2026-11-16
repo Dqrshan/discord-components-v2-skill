@@ -1,0 +1,25 @@
+# Netlify build configuration for the Astro site
+# Site root is the `website/` directory, so this file lives here.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro v7 requires Node.js >= 18
+  NODE_VERSION = "20"
+
+# Pretty URLs: strip trailing .html and enforce trailing slashes for directories
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+# Security headers for the static build
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
