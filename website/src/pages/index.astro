@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Comparison from '../components/Comparison.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Discord Components V2 skill for coding agents"
+  description="A skill file that teaches coding agents to build Discord messages with Components V2 in discord.js: layouts, limits, recipes, and migration."
+>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Comparison />
+    <CTA />
+  </main>
+  <Footer />
+
+  <script>
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Pointer-tracked highlights (hero spotlight, panel glow). Skipped on touch.
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+    const track = (element: HTMLElement, xVar: string, yVar: string) => {
+      let queued = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      element.addEventListener('pointermove', (event) => {
+        const rect = element.getBoundingClientRect();
+        lastX = event.clientX - rect.left;
+        lastY = event.clientY - rect.top;
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          element.style.setProperty(xVar, `${lastX}px`);
+          element.style.setProperty(yVar, `${lastY}px`);
+        });
+      });
+    };
+
+    if (finePointer && !reduced) {
+      document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((element) => {
+        track(element, '--mx', '--my');
+      });
+      document.querySelectorAll<HTMLElement>('[data-glow]').forEach((element) => {
+        track(element, '--px', '--py');
+      });
+    }
+
+    // Copy commands, with a fallback for browsers without the clipboard API.
+    const statusRegions = Array.from(document.querySelectorAll<HTMLElement>('[data-copy-status]'));
+    const announce = (message: string) => {
+      statusRegions.forEach((region) => {
+        region.textContent = message;
+      });
+    };
+
+    const legacyCopy = (value: string) => {
+      const field = document.createElement('textarea');
+      field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand('copy');
+      document.body.removeChild(field);
+    };
+
+    document.querySelectorAll<HTMLElement>('[data-copy]').forEach((button) => {
+      const label = button.querySelector<HTMLElement>('[data-copy-label]');
+      const original = label?.textContent ?? 'Copy';
+      let timer: number | undefined;
+
+      button.addEventListener('click', async () => {
+        const value = button.dataset.copy ?? '';
+        try {
+          if (navigator.clipboard?.writeText) {
+            try {
+              await navigator.clipboard.writeText(value);
+            } catch {
+              legacyCopy(value);
+            }
+          } else {
+            legacyCopy(value);
+          }
+          if (label) label.textContent = 'Copied';
+          announce(`Copied: ${value}`);
+        } catch {
+          if (label) label.textContent = 'Press Ctrl C';
+          announce(`Copy failed. Command: ${value}`);
+        }
+
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          if (label) label.textContent = original;
+        }, 1800);
+      });
+    });
+
+    // Live star count. Falls back to the plain label when the API is unavailable.
+    const starSlot = document.querySelector<HTMLElement>('[data-stars]');
+    if (starSlot) {
+      const format = (count: number) =>
+        count >= 1000 ? `${(count / 1000).toFixed(count >= 10000 ? 0 : 1)}k` : String(count);
+
+      fetch('https://api.github.com/repos/Dqrshan/discord-components-v2-skill', {
+        headers: { Accept: 'application/vnd.github+json' },
+      })
+        .then((response) => (response.ok ? response.json() : null))
+        .then((data) => {
+          if (!data || typeof data.stargazers_count !== 'number') return;
+          starSlot.textContent = format(data.stargazers_count);
+          starSlot.closest('a')?.setAttribute(
+            'title',
+            `${data.stargazers_count} stars on GitHub`,
+          );
+        })
+        .catch(() => {});
+    }
+
+    // Reveal on scroll. Content stays visible without scripting.
+    const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+    if (!reduced && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.15 },
+      );
+
+      targets.forEach((target) => observer.observe(target));
+    } else {
+      targets.forEach((target) => target.classList.add('is-in'));
+    }
+  </script>
+</BaseLayout>

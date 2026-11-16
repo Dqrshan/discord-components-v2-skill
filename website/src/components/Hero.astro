@@ -1,0 +1,453 @@
+---
+const repo = 'https://github.com/Dqrshan/discord-components-v2-skill';
+const install = 'npx skills add Dqrshan/discord-components-v2-skill';
+---
+
+<section class="hero" id="top" data-spotlight>
+  <div class="hero__aurora" aria-hidden="true">
+    <span class="hero__blob hero__blob--a"></span>
+    <span class="hero__blob hero__blob--b"></span>
+  </div>
+
+  <div class="container hero__inner">
+    <p class="hero__slug">discord-components-v2</p>
+
+    <h1 class="hero__title">
+      <span class="word"><span>Components</span></span>
+      <span class="word"><span>V2</span></span>
+    </h1>
+
+    <p class="hero__sub">
+      One skill file teaches your agent Components V2 layouts, limits, and recipes.
+    </p>
+
+    <div class="install">
+      <div class="install__line">
+        <span class="install__prompt" aria-hidden="true">$</span>
+        <code class="install__cmd">{install}</code>
+      </div>
+      <button class="install__copy" type="button" data-copy={install} aria-label="Copy install command">
+        <span data-copy-label>Copy</span>
+      </button>
+    </div>
+
+    <div class="hero__meta">
+      <a class="gh" href={repo} rel="noreferrer">
+        <svg class="gh__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            fill="currentColor"
+            d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.2.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"
+          ></path>
+        </svg>
+        <span>GitHub</span>
+        <span class="gh__sep" aria-hidden="true"></span>
+        <svg class="gh__star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            fill="currentColor"
+            d="m12 2.6 2.9 5.88 6.49.95-4.7 4.57 1.11 6.46L12 17.4l-5.8 3.06 1.1-6.46-4.69-4.57 6.49-.95Z"
+          ></path>
+        </svg>
+        <span class="gh__count" data-stars>Star</span>
+      </a>
+      <span class="hero__license">MIT licensed</span>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite" data-copy-status></p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(700px, calc(100dvh - 65px));
+    display: grid;
+    align-items: center;
+    padding-block: clamp(64px, 9vw, 110px) clamp(72px, 10vw, 120px);
+    overflow: clip;
+    text-align: center;
+  }
+
+  /* Cursor spotlight: a soft brand-tinted pool that tracks the pointer. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 28%),
+      rgba(88, 101, 242, 0.16),
+      transparent 62%
+    );
+    opacity: 0.65;
+    transition: opacity 0.6s var(--ease);
+  }
+
+  .hero:hover::before {
+    opacity: 1;
+  }
+
+  .hero__aurora {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: clip;
+    pointer-events: none;
+    mask-image: linear-gradient(180deg, #000 10%, transparent 78%);
+  }
+
+  .hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.28;
+    will-change: transform;
+  }
+
+  .hero__blob--a {
+    width: 520px;
+    height: 420px;
+    top: -180px;
+    left: 50%;
+    margin-left: -380px;
+    background: #4c57dd;
+    animation: drift-a 26s var(--ease) infinite alternate;
+  }
+
+  .hero__blob--b {
+    width: 420px;
+    height: 360px;
+    top: -120px;
+    left: 50%;
+    margin-left: 40px;
+    background: #7c3aed;
+    opacity: 0.16;
+    animation: drift-b 32s var(--ease) infinite alternate;
+  }
+
+  @keyframes drift-a {
+    from {
+      transform: translate3d(-40px, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(60px, 30px, 0) scale(1.12);
+    }
+  }
+
+  @keyframes drift-b {
+    from {
+      transform: translate3d(30px, 10px, 0) scale(1.08);
+    }
+    to {
+      transform: translate3d(-50px, 24px, 0) scale(0.96);
+    }
+  }
+
+  .hero__inner {
+    display: grid;
+    justify-items: center;
+    gap: 0;
+  }
+
+  .hero__slug {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+    color: var(--dim);
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    animation: soft-rise 0.9s var(--ease-out) both;
+  }
+
+  .hero__title {
+    margin-top: 26px;
+    font-size: clamp(3rem, 8.4vw, 6rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 0.22em;
+  }
+
+  .word {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+  }
+
+  .word > span {
+    display: inline-block;
+    transform: translateY(105%);
+    animation: word-up 1.05s var(--ease-out) both;
+  }
+
+  .word:nth-child(2) > span {
+    animation-delay: 0.09s;
+  }
+
+  @keyframes word-up {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes soft-rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .hero__sub {
+    margin-top: 20px;
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.6;
+    animation: soft-rise 0.9s var(--ease-out) 0.2s both;
+  }
+
+  /* Install command: one surface, a shimmering edge, and a copy control. */
+  .install {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 34px;
+    padding: 7px 7px 7px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01)), #12151c;
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(88, 101, 242, 0.08);
+    animation: soft-rise 0.9s var(--ease-out) 0.3s both;
+    max-width: 100%;
+  }
+
+  .install::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 0deg,
+      transparent 250deg,
+      rgba(124, 134, 255, 0.75) 300deg,
+      transparent 340deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: sweep 7s linear infinite;
+    pointer-events: none;
+  }
+
+  @property --angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @keyframes sweep {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  .install__line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .install__prompt {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-bright);
+    flex: none;
+  }
+
+  .install__cmd {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: #d9deea;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .install__cmd::-webkit-scrollbar {
+    display: none;
+  }
+
+  .install__copy {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    background: var(--accent-button);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    min-height: 36px;
+    flex: none;
+    cursor: pointer;
+    transition:
+      background-color 0.18s var(--ease),
+      transform 0.18s var(--ease);
+  }
+
+  .install__copy:hover {
+    background: var(--accent-button-hover);
+  }
+
+  .install__copy:active {
+    transform: translateY(1px);
+  }
+
+  .hero__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    animation: soft-rise 0.9s var(--ease-out) 0.4s both;
+  }
+
+  .gh {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line-2);
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--text);
+    font-size: 0.8125rem;
+    transition:
+      border-color 0.2s var(--ease),
+      background-color 0.2s var(--ease);
+  }
+
+  .gh:hover {
+    border-color: #4a5262;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .gh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.14) 50%, transparent 62%);
+    transform: translateX(-130%);
+    transition: transform 0.75s var(--ease);
+    pointer-events: none;
+  }
+
+  .gh:hover::after {
+    transform: translateX(130%);
+  }
+
+  .gh__mark {
+    width: 15px;
+    height: 15px;
+  }
+
+  .gh__star {
+    width: 13px;
+    height: 13px;
+    color: #e3b341;
+  }
+
+  .gh__sep {
+    width: 1px;
+    height: 14px;
+    background: var(--line-2);
+    margin-inline: 2px;
+  }
+
+  .gh__count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: color 0.2s var(--ease);
+  }
+
+  .hero__license {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--dim);
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      min-height: min(620px, calc(100dvh - 65px));
+    }
+
+    .hero__title {
+      margin-top: 20px;
+    }
+
+    .install {
+      width: 100%;
+      flex-wrap: wrap;
+      padding: 12px 12px 12px 14px;
+      gap: 10px;
+    }
+
+    .install__line {
+      flex-basis: 100%;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .install__cmd {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      font-size: 0.78rem;
+      color: #c6ccd9;
+    }
+
+    .install__copy {
+      margin-left: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before {
+      display: none;
+    }
+
+    .hero__blob {
+      animation: none;
+    }
+
+    .install::before {
+      animation: none;
+    }
+  }
+</style>

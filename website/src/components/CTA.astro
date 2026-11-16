@@ -1,0 +1,98 @@
+---
+const repo = 'https://github.com/Dqrshan/discord-components-v2-skill';
+const skill = `${repo}/blob/main/SKILL.md`;
+---
+
+<section class="cta" id="install" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="cta__card" data-reveal>
+      <div class="cta__glow" aria-hidden="true"></div>
+      <h2 id="cta-title">Make the next message the good one.</h2>
+      <p>Add the skill once. Your agent handles the component structure from then on.</p>
+      <div class="cta__actions">
+        <a class="button button--primary" href={repo} rel="noreferrer">Star on GitHub</a>
+        <a class="button button--ghost" href={skill} rel="noreferrer">Read SKILL.md</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: clamp(40px, 6vw, 72px) clamp(72px, 9vw, 112px);
+  }
+
+  .cta__card {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    text-align: center;
+    padding: clamp(44px, 7vw, 80px) clamp(22px, 5vw, 64px);
+    border: 1px solid var(--line-2);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 60%),
+      var(--bg-2);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  .cta__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(124, 134, 255, 0.5), transparent 42%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .cta__glow {
+    position: absolute;
+    top: -180px;
+    left: 50%;
+    width: 560px;
+    height: 340px;
+    transform: translateX(-50%);
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgba(88, 101, 242, 0.28), transparent);
+    filter: blur(18px);
+  }
+
+  .cta__card h2 {
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+
+  .cta__card p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 44ch;
+    margin-inline: auto;
+  }
+
+  .cta__actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    .cta__actions .button {
+      flex: 1 1 100%;
+    }
+  }
+</style>
