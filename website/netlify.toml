@@ -6,8 +6,8 @@
   publish = "dist"
 
 [build.environment]
-  # Astro v7 requires Node.js >= 18
-  NODE_VERSION = "20"
+  # Astro v7 requires Node.js >= 22.23.4
+  NODE_VERSION = "22"
 
 # Pretty URLs: strip trailing .html and enforce trailing slashes for directories
 [[redirects]]
