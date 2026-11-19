@@ -47,7 +47,7 @@ Once installed, the skill activates when you work on Discord bot messages: layou
 - **Layout recipes** — info cards, dashboards, announcements, confirmation prompts, menus, ephemeral success and error states.
 - **Migration** — converting existing embed code to containers and text displays, with a field-by-field mapping.
 - **Troubleshooting** — fixes for the common runtime errors and payload rejections.
-- **Design guidance** — hierarchy, spacing, accent colors, and accessibility so messages don't look generated.
+- **Design engineering** — task-first hierarchy, component selection, spacing, color, mobile scanning, accessibility, interaction states, and prompt feedback tailored to Discord's native rendering constraints.
 
 ## Example
 
